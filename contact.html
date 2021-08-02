@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en-US" prefix="og: https://ogp.me/ns#" >
+	
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript;n||console.error("WPRocket unable to document.write this: "+t);const i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+		<link rel="profile" href="https://gmpg.org/xfn/11">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+				<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+			window.flatStyles = window.flatStyles || ''
+
+			window.lightspeedOptimizeStylesheet = function () {
+				const currentStylesheet = document.querySelector( '.tcb-lightspeed-style:not([data-ls-optimized])' )
+
+				if ( currentStylesheet ) {
+					try {
+						if ( currentStylesheet.sheet && currentStylesheet.sheet.cssRules ) {
+							if ( window.flatStyles ) {
+								if ( this.optimizing ) {
+									setTimeout( window.lightspeedOptimizeStylesheet.bind( this ), 24 )
+								} else {
+									this.optimizing = true;
+
+									let rulesIndex = 0;
+
+									while ( rulesIndex < currentStylesheet.sheet.cssRules.length ) {
+										const rule = currentStylesheet.sheet.cssRules[ rulesIndex ]
+										/* remove rules that already exist in the page */
+										if ( rule.type === CSSRule.STYLE_RULE && window.flatStyles.includes( `${rule.selectorText}{` ) ) {
+											currentStylesheet.sheet.deleteRule( rulesIndex )
+										} else {
+											rulesIndex ++
+										}
+									}
+									/* optimize, mark it such, move to the next file, append the styles we have until now */
+									currentStylesheet.setAttribute( 'data-ls-optimized', '1' )
+
+									window.flatStyles += currentStylesheet.innerHTML
+
+									this.optimizing = false
+								}
+							} else {
+								window.flatStyles = currentStylesheet.innerHTML
+								currentStylesheet.setAttribute( 'data-ls-optimized', '1' )
+							}
+						}
+					} catch ( error ) {
+						console.warn( error )
+					}
+
+					if ( currentStylesheet.parentElement.tagName !== 'HEAD' ) {
+						/* always make sure that those styles end up in the head */
+						document.head.prepend( currentStylesheet )
+					}
+				}
+			}
+
+			window.lightspeedOptimizeFlat = function ( styleSheetElement ) {
+				if ( document.querySelectorAll( 'link[href*="thrive_flat.css"]' ).length > 1 ) {
+					/* disable this flat if we already have one */
+					styleSheetElement.setAttribute( 'disabled', true )
+				} else {
+					/* if this is the first one, make sure he's in head */
+					if ( styleSheetElement.parentElement.tagName !== 'HEAD' ) {
+						document.head.append( styleSheetElement )
+					}
+				}
+			}
+		</script>
+		<style type="text/css" id="tcb-style-base-page-32874"  onLoad="typeof window.lightspeedOptimizeStylesheet === 'function' && window.lightspeedOptimizeStylesheet()" class="tcb-lightspeed-style">.tve_image_caption{position:relative;}.tve_image_caption:not(.tcb-mm-image.tve-tab-image){height:auto !important;}.tve_image_caption .tve_image{max-width:100%;width:100%;}.thrv_text_element a:not(.tcb-button-link){font-size:inherit;}.thrv_text_element{overflow-wrap:break-word;}.thrive-symbol-shortcode{position:relative;}body:not(.tve_editor_page) .thrv_wrapper.thrv_footer,body:not(.tve_editor_page) .thrv_wrapper.thrv_header{padding:0px;}.thrv_footer .thrive-symbol-shortcode{box-sizing:border-box;margin-right:auto;margin-left:auto;min-height:40px;}.tcb-post-content.thrv_wrapper{margin-top:15px;margin-bottom:15px;padding:0px;}html{text-rendering:auto !important;}html body{text-rendering:auto !important;}.thrv_wrapper{margin-top:20px;margin-bottom:20px;padding:1px;}.thrv_wrapper div{box-sizing:content-box;}.thrv_symbol .thrv_wrapper:not(.thrv_icon){box-sizing:border-box !important;}.thrv_wrapper.thrv_text_element,.thrv_wrapper.thrv_symbol{margin:0px;}p{font-size:1em;}.tve_image{border-radius:0px;box-shadow:none;}div .tve_image_caption{padding:0px;max-width:100% !important;box-sizing:border-box !important;}.tve_image_caption .tve_image_frame{display:block;max-width:100%;position:relative;overflow:hidden;}.tve_image_caption .tve_image{display:block;padding:0px;height:auto;}.thrv_symbol.thrv_header,.thrv_symbol.thrv_footer{width:100%;position:relative;box-sizing:border-box;}.thrv_symbol.thrv_header .thrive-symbol-shortcode,.thrv_symbol.thrv_footer .thrive-symbol-shortcode{margin:0px auto;position:relative;}.symbol-section-in{margin:0px auto;position:relative;z-index:1;box-sizing:border-box;}.symbol-section-in:empty::before{font-family:sans-serif;line-height:40px;}.symbol-section-in::after,.symbol-section-in::before{content:"";display:block;overflow:auto;}.symbol-section-out{position:absolute;width:100%;height:100%;left:0px;top:0px;box-sizing:border-box !important;overflow:hidden;}.tcb-post-content::after{clear:both;}.tcb-post-content{margin:1.5em 0px 0px;}body:not(.ttb-editor-page) .tcb-post-content::before,body:not(.ttb-editor-page) .tcb-post-content::after{display:none;}.thrv_wrapper.thrv_text_element{padding:1px;}.thrv_wrapper.main-container{padding:0px;}@media (max-width:767px){html,body{overflow-x:hidden !important;max-width:100vw !important;}}@media screen and (max-device-width:480px){body{-moz-text-size-adjust:none;}}</style><link rel='stylesheet' id='tcb-style-base-thrive_template-31771'  href='http://www.ETHMAN.com/wp-content/uploads/thrive/tcb-base-css-31771-1624991246.css' type='text/css' media='all' />
+<!-- Search Engine Optimization by Rank Math PRO - https://s.rankmath.com/home -->
+<title>Contact Thank You | ETHMAN</title>
+<meta name="description" content="​Thanks for contacting us! We will get in touch with you shortly."/>
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+<link rel="canonical" href="https://www.ETHMAN.com/contact-thank-you/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Contact Thank You | ETHMAN" />
+<meta property="og:description" content="​Thanks for contacting us! We will get in touch with you shortly." />
+<meta property="og:url" content="https://www.ETHMAN.com/contact-thank-you/" />
+<meta property="og:site_name" content="ETHMAN" />
+<meta property="article:publisher" content="https://www.facebook.com/ETHMAN/" />
+<meta property="og:updated_time" content="2020-06-23T01:41:06+08:00" />
+<meta property="fb:app_id" content="175941172588279" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Contact Thank You | ETHMAN" />
+<meta name="twitter:description" content="​Thanks for contacting us! We will get in touch with you shortly." />
+<meta name="twitter:site" content="@Rayner_Teo" />
+<meta name="twitter:creator" content="@Rayner_Teo" />
+<script type="application/ld+json" class="rank-math-schema-pro">{"@context":"https://schema.org","@graph":[{"@type":["Person","Organization"],"@id":"https://www.ETHMAN.com/#person","name":"ETHMAN","logo":{"@type":"ImageObject","@id":"https://www.ETHMAN.com/#logo","url":"https://www.ETHMAN.com/wp-content/uploads/2020/07/Logo-low-res.png","caption":"ETHMAN","inLanguage":"en-US","width":"400","height":"305"},"image":{"@type":"ImageObject","@id":"https://www.ETHMAN.com/#logo","url":"https://www.ETHMAN.com/wp-content/uploads/2020/07/Logo-low-res.png","caption":"ETHMAN","inLanguage":"en-US","width":"400","height":"305"}},{"@type":"WebSite","@id":"https://www.ETHMAN.com/#website","url":"https://www.ETHMAN.com","name":"ETHMAN","publisher":{"@id":"https://www.ETHMAN.com/#person"},"inLanguage":"en-US"},{"@type":"Person","@id":"https://www.ETHMAN.com/author/denis/","name":"Denis Ethier","url":"https://www.ETHMAN.com/author/denis/","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/0d5d8d5767c21a98d06b93f5d2cccec1?s=96&amp;d=blank&amp;r=g","url":"https://secure.gravatar.com/avatar/0d5d8d5767c21a98d06b93f5d2cccec1?s=96&amp;d=blank&amp;r=g","caption":"Denis Ethier","inLanguage":"en-US"}},{"@type":"WebPage","@id":"https://www.ETHMAN.com/contact-thank-you/#webpage","url":"https://www.ETHMAN.com/contact-thank-you/","name":"Contact Thank You | ETHMAN","datePublished":"2020-06-12T08:15:03+08:00","dateModified":"2020-06-23T01:41:06+08:00","author":{"@id":"https://www.ETHMAN.com/author/denis/"},"isPartOf":{"@id":"https://www.ETHMAN.com/#website"},"inLanguage":"en-US"},{"@type":"Article","headline":"Contact Thank You | ETHMAN","datePublished":"2020-06-12T08:15:03+08:00","dateModified":"2020-06-23T01:41:06+08:00","author":{"@type":"Person","name":"Denis Ethier"},"publisher":{"@id":"https://www.ETHMAN.com/#person"},"description":"\u200bThanks for contacting us! We will get in touch with you shortly.","name":"Contact Thank You | ETHMAN","@id":"https://www.ETHMAN.com/contact-thank-you/#richSnippet","isPartOf":{"@id":"https://www.ETHMAN.com/contact-thank-you/#webpage"},"inLanguage":"en-US","mainEntityOfPage":{"@id":"https://www.ETHMAN.com/contact-thank-you/#webpage"}}]}</script>
+<!-- /Rank Math WordPress SEO plugin -->
+
+<link rel='dns-prefetch' href='http://www.google.com/' />
+<link rel="alternate" type="application/rss+xml" title="ETHMAN &raquo; Feed" href="https://www.ETHMAN.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="ETHMAN &raquo; Comments Feed" href="https://www.ETHMAN.com/comments/feed/" />
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://www.ETHMAN.com/wp-includes/css/dist/block-library/style.min.css?ver=5.7.2' type='text/css' media='all' />
+<link rel='stylesheet' id='thrive-theme-css'  href='https://www.ETHMAN.com/wp-content/themes/thrive-theme/style.css?ver=2.6.2' type='text/css' media='all' />
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/jquery/jquery.min.js?ver=3.5.1' id='jquery-core-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/imagesloaded.min.js?ver=4.1.4' id='imagesloaded-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/masonry.min.js?ver=4.2.2' id='masonry-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/jquery/jquery.masonry.min.js?ver=3.1.2b' id='jquery-masonry-js'></script>
+<script type='text/javascript' id='tve_frontend-js-extra'>
+/* <![CDATA[ */
+var tve_frontend_options = {"ajaxurl":"https:\/\/www.ETHMAN.com\/wp-admin\/admin-ajax.php","is_editor_page":"","page_events":[],"is_single":"1","social_fb_app_id":"","dash_url":"https:\/\/www.ETHMAN.com\/wp-content\/themes\/thrive-theme\/thrive-dashboard","translations":{"Copy":"Copy","empty_username":"ERROR: The username field is empty.","empty_password":"ERROR: The password field is empty.","empty_login":"ERROR: Enter a username or email address.","min_chars":"At least %s characters are needed","no_headings":"No headings found","registration_err":{"required_field":"<strong>Error<\/strong>: This field is required","required_email":"<strong>Error<\/strong>: Please type your email address.","invalid_email":"<strong>Error<\/strong>: The email address isn&#8217;t correct.","passwordmismatch":"<strong>Error<\/strong>: Password mismatch"}},"routes":{"posts":"https:\/\/www.ETHMAN.com\/wp-json\/tcb\/v1\/posts","courses":"https:\/\/www.ETHMAN.com\/wp-json\/tva\/v1\/course_list_element"},"nonce":"7c4ebd3475","allow_video_src":"","post_request_data":[],"ip":"217.138.193.180","current_user":[],"post_id":"32874","post_title":"Contact Thank You","post_type":"page","post_url":"https:\/\/www.ETHMAN.com\/contact-thank-you\/","is_lp":""};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-content/plugins/thrive-visual-editor/editor/js/dist/modules/general.min.js?ver=2.8.2' id='tve_frontend-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.google.com/recaptcha/api.js?render=6LcrUNkZAAAAAOIrg0Zb2SoAzMPgmvbXtsyDsRib&amp;ver=2.6.1' id='tve-dash-recaptcha-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/jquery/ui/mouse.min.js?ver=1.12.1' id='jquery-ui-mouse-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/jquery/ui/resizable.min.js?ver=1.12.1' id='jquery-ui-resizable-js'></script>
+<script type='text/javascript' id='theme-frontend-js-extra'>
+/* <![CDATA[ */
+var thrive_front_localize = {"comments_form":{"error_defaults":{"email":"Email address invalid","url":"Website address invalid","required":"Required field missing"}},"routes":{"posts":"https:\/\/www.ETHMAN.com\/wp-json\/tcb\/v1\/posts","frontend":"https:\/\/www.ETHMAN.com\/wp-json\/ttb\/v1\/frontend"},"queried_object":{"ID":32874,"post_author":"14"},"tar_post_url":"?tve=true&action=architect&from_theme=1","is_editor":"","ID":"31771","template_url":"?tve=true&action=architect&from_tar=32874","pagination_url":{"template":"https:\/\/www.ETHMAN.com\/contact-thank-you\/page\/[thrive_page_number]\/","base":"https:\/\/www.ETHMAN.com\/contact-thank-you\/"},"sidebar_visibility":[],"is_singular":"1","is_user_logged_in":""};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-content/themes/thrive-theme/inc/assets/dist/frontend.min.js?ver=2.6.2' id='theme-frontend-js'></script>
+<link rel="https://api.w.org/" href="https://www.ETHMAN.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.ETHMAN.com/wp-json/wp/v2/pages/32874" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.ETHMAN.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.ETHMAN.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.7.2" />
+<link rel='shortlink' href='https://www.ETHMAN.com/?p=32874' />
+<link rel="alternate" type="application/json+oembed" href="https://www.ETHMAN.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ETHMAN.com%2Fcontact-thank-you%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.ETHMAN.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ETHMAN.com%2Fcontact-thank-you%2F&amp;format=xml" />
+<style>
+
+	/* for unique landing page accent color values,  put any new css added here inside tcb-bridge/js/editor */
+
+	/* accent color */
+	#thrive-comments .tcm-color-ac,
+	#thrive-comments .tcm-color-ac span {
+		color: #03a9f4;
+	}
+
+	/* accent color background */
+	#thrive-comments .tcm-background-color-ac,
+	#thrive-comments .tcm-background-color-ac-h:hover span,
+	#thrive-comments .tcm-background-color-ac-active:active {
+		background-color: #03a9f4	}
+
+	/* accent color border */
+	#thrive-comments .tcm-border-color-ac {
+		border-color: #03a9f4;
+		outline: none;
+	}
+
+	#thrive-comments .tcm-border-color-ac-h:hover {
+		border-color: #03a9f4;
+	}
+
+	#thrive-comments .tcm-border-bottom-color-ac {
+		border-bottom-color: #03a9f4;
+	}
+
+	/* accent color fill*/
+	#thrive-comments .tcm-svg-fill-ac {
+		fill: #03a9f4;
+	}
+
+	/* accent color for general elements */
+
+	/* inputs */
+	#thrive-comments textarea:focus,
+	#thrive-comments input:focus {
+		border-color: #03a9f4;
+		box-shadow: inset 0 0 3px #03a9f4;
+	}
+
+	/* links */
+	#thrive-comments a {
+		color: #03a9f4;
+	}
+
+	/*
+	* buttons and login links
+	* using id to override the default css border-bottom
+	*/
+	#thrive-comments button,
+	#thrive-comments #tcm-login-up,
+	#thrive-comments #tcm-login-down {
+		color: #03a9f4;
+		border-color: #03a9f4;
+	}
+
+	/* general buttons hover and active functionality */
+	#thrive-comments button:hover,
+	#thrive-comments button:focus,
+	#thrive-comments button:active {
+		background-color: #03a9f4	}
+
+</style>
+<style type="text/css" id="tve_global_variables">:root{--tcb-color-0:rgb(255, 102, 0);--tcb-color-0-h:24;--tcb-color-0-s:100%;--tcb-color-0-l:50%;--tcb-color-0-a:1;--tcb-color-1:rgba(8, 218, 33, 0.85);--tcb-color-1-h:127;--tcb-color-1-s:92%;--tcb-color-1-l:44%;--tcb-color-1-a:0.85;--tcb-color-2:rgba(39, 40, 171, 0.25);--tcb-color-2-h:239;--tcb-color-2-s:62%;--tcb-color-2-l:41%;--tcb-color-2-a:0.25;--tcb-color-3:rgb(79, 79, 79);--tcb-color-3-h:0;--tcb-color-3-s:0%;--tcb-color-3-l:30%;--tcb-color-3-a:1;--tcb-color-4:rgb(0, 0, 0);--tcb-color-4-h:0;--tcb-color-4-s:0%;--tcb-color-4-l:0%;--tcb-color-4-a:1;--tcb-color-5:rgb(255, 255, 255);--tcb-color-5-h:0;--tcb-color-5-s:0%;--tcb-color-5-l:100%;--tcb-color-5-a:1;--tcb-color-6:rgb(235, 235, 235);--tcb-color-6-h:0;--tcb-color-6-s:0%;--tcb-color-6-l:92%;--tcb-color-6-a:1;--tcb-color-7:rgb(83, 165, 64);--tcb-color-7-h:108;--tcb-color-7-s:44%;--tcb-color-7-l:44%;--tcb-color-7-a:1;--tcb-color-8:rgb(235, 235, 235);--tcb-color-8-h:0;--tcb-color-8-s:0%;--tcb-color-8-l:92%;--tcb-color-8-a:1;--tcb-color-9:rgb(51, 102, 255);--tcb-color-9-h:225;--tcb-color-9-s:100%;--tcb-color-9-l:60%;--tcb-color-9-a:1;--tcb-color-10:rgb(7, 38, 130);--tcb-color-10-h:224;--tcb-color-10-s:89%;--tcb-color-10-l:26%;--tcb-color-10-a:1;--tcb-color-11:rgba(19, 77, 164, 0.5);--tcb-color-11-h:216;--tcb-color-11-s:79%;--tcb-color-11-l:35%;--tcb-color-11-a:0.5;--tcb-skin-color-0:hsla(var(--tcb-theme-main-master-h,210), var(--tcb-theme-main-master-s,79%), var(--tcb-theme-main-master-l,54%), var(--tcb-theme-main-master-a,1));--tcb-skin-color-0-h:var(--tcb-theme-main-master-h,210);--tcb-skin-color-0-s:var(--tcb-theme-main-master-s,79%);--tcb-skin-color-0-l:var(--tcb-theme-main-master-l,54%);--tcb-skin-color-0-a:var(--tcb-theme-main-master-a,1);--tcb-skin-color-1:hsla(calc(var(--tcb-theme-main-master-h,210) - 0 ), 79%, 54%, 1);--tcb-skin-color-1-h:calc(var(--tcb-theme-main-master-h,210) - 0 );--tcb-skin-color-1-s:79%;--tcb-skin-color-1-l:54%;--tcb-skin-color-1-a:1;--tcb-skin-color-3:hsla(calc(var(--tcb-theme-main-master-h,210) + 30 ), 85%, 13%, 1);--tcb-skin-color-3-h:calc(var(--tcb-theme-main-master-h,210) + 30 );--tcb-skin-color-3-s:85%;--tcb-skin-color-3-l:13%;--tcb-skin-color-3-a:1;--tcb-skin-color-8:hsla(calc(var(--tcb-theme-main-master-h,210) - 0 ), 79%, 54%, 1);--tcb-skin-color-8-h:calc(var(--tcb-theme-main-master-h,210) - 0 );--tcb-skin-color-8-s:79%;--tcb-skin-color-8-l:54%;--tcb-skin-color-8-a:1;--tcb-skin-color-9:hsla(calc(var(--tcb-theme-main-master-h,210) - 3 ), 56%, 96%, 1);--tcb-skin-color-9-h:calc(var(--tcb-theme-main-master-h,210) - 3 );--tcb-skin-color-9-s:56%;--tcb-skin-color-9-l:96%;--tcb-skin-color-9-a:1;--tcb-skin-color-10:hsla(calc(var(--tcb-theme-main-master-h,210) - 21 ), 100%, 81%, 1);--tcb-skin-color-10-h:calc(var(--tcb-theme-main-master-h,210) - 21 );--tcb-skin-color-10-s:100%;--tcb-skin-color-10-l:81%;--tcb-skin-color-10-a:1;--tcb-skin-color-13:hsla(calc(var(--tcb-theme-main-master-h,210) - 0 ), 79%, 36%, 1);--tcb-skin-color-13-h:calc(var(--tcb-theme-main-master-h,210) - 0 );--tcb-skin-color-13-s:79%;--tcb-skin-color-13-l:36%;--tcb-skin-color-13-a:1;--tcb-skin-color-16:hsla(calc(var(--tcb-theme-main-master-h,210) - 0 ), 3%, 36%, 1);--tcb-skin-color-16-h:calc(var(--tcb-theme-main-master-h,210) - 0 );--tcb-skin-color-16-s:3%;--tcb-skin-color-16-l:36%;--tcb-skin-color-16-a:1;--tcb-skin-color-18:hsla(calc(var(--tcb-theme-main-master-h,210) - 0 ), calc(var(--tcb-theme-main-master-s,79%) - 0% ), calc(var(--tcb-theme-main-master-l,54%) - 0% ), 1);--tcb-skin-color-18-h:calc(var(--tcb-theme-main-master-h,210) - 0 );--tcb-skin-color-18-s:calc(var(--tcb-theme-main-master-s,79%) - 0% );--tcb-skin-color-18-l:calc(var(--tcb-theme-main-master-l,54%) - 0% );--tcb-skin-color-18-a:1;--tcb-skin-color-19:hsla(calc(var(--tcb-theme-main-master-h,210) - 3 ), 56%, 96%, 1);--tcb-skin-color-19-h:calc(var(--tcb-theme-main-master-h,210) - 3 );--tcb-skin-color-19-s:56%;--tcb-skin-color-19-l:96%;--tcb-skin-color-19-a:1;--tcb-skin-color-20:hsla(calc(var(--tcb-theme-main-master-h,210) - 3 ), 56%, 96%, 1);--tcb-skin-color-20-h:calc(var(--tcb-theme-main-master-h,210) - 3 );--tcb-skin-color-20-s:56%;--tcb-skin-color-20-l:96%;--tcb-skin-color-20-a:1;--tcb-skin-color-2:rgb(248, 248, 248);--tcb-skin-color-2-h:0;--tcb-skin-color-2-s:0%;--tcb-skin-color-2-l:97%;--tcb-skin-color-2-a:1;--tcb-skin-color-4:rgb(12, 17, 21);--tcb-skin-color-4-h:206;--tcb-skin-color-4-s:27%;--tcb-skin-color-4-l:6%;--tcb-skin-color-4-a:1;--tcb-skin-color-5:rgb(106, 107, 108);--tcb-skin-color-5-h:210;--tcb-skin-color-5-s:0%;--tcb-skin-color-5-l:41%;--tcb-skin-color-5-a:1;--tcb-skin-color-14:rgb(230, 230, 230);--tcb-skin-color-14-h:0;--tcb-skin-color-14-s:0%;--tcb-skin-color-14-l:90%;--tcb-skin-color-14-a:1;--tcb-main-master-h:216;--tcb-main-master-s:99%;--tcb-main-master-l:58%;--tcb-main-master-a:1;--tcb-theme-main-master-h:216;--tcb-theme-main-master-s:99%;--tcb-theme-main-master-l:58%;--tcb-theme-main-master-a:1;}</style><!-- Deadline Funnel --><script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-cfasync="false">function SendUrlToDeadlineFunnel(e){var r,t,c,a,h,n,o,A,i = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",d=0,l=0,s="",u=[];if(!e)return e;do r=e.charCodeAt(d++),t=e.charCodeAt(d++),c=e.charCodeAt(d++),A=r<<16|t<<8|c,a=A>>18&63,h=A>>12&63,n=A>>6&63,o=63&A,u[l++]=i.charAt(a)+i.charAt(h)+i.charAt(n)+i.charAt(o);while(d<e.length);s=u.join("");var C=e.length%3;var decoded = (C?s.slice(0,C-3):s)+"===".slice(C||3);decoded = decoded.replace("+", "-");decoded = decoded.replace("https://www.ETHMAN.com/", "_");return decoded;} var url = SendUrlToDeadlineFunnel(location.href); var parentUrlValue;try {parentUrlValue = window.parent.location.href;} catch(err) {if(err.name === "SecurityError") {parentUrlValue = document.referrer;}}var parentUrl = (parent !== window) ? ("/" + SendUrlToDeadlineFunnel(parentUrlValue)) : "";(function() {var s = document.createElement("script");s.type = "text/javascript";s.async = true;s.setAttribute("data-scriptid", "dfunifiedcode");s.src ="https://a.deadlinefunnel.com/unified/reactunified.bundle.js?userIdHash=eyJpdiI6IkpRXC9DVWcyYlVRanJlWEpQYis5dGtnPT0iLCJ2YWx1ZSI6IjBQUkVKbFdXa21kdklrY0FtM3NyQ3c9PSIsIm1hYyI6IjIxMTEzYTZjMDRmYzc5OTU2NDVhMjRkNjAxMDU3NGYyZDg4Mjg0YWZjZjk5NzNkNWVjZjFiZWIxZTljZDE4MjAifQ==&amp;pageFromUrl="+url+"&parentPageFromUrl="+parentUrl;var s2 = document.getElementsByTagName("script")[0];s2.parentNode.insertBefore(s, s2);})();</script><!-- End Deadline Funnel --><script type="rocketlazyloadscript">
+window.sparkloop_delay = 1500;
+</script>
+
+<script type="rocketlazyloadscript" async src='https://dash.sparkloop.app/widget/MF7f39b5e417/embed.js' data-sparkloop></script><!-- Google Tag Manager -->
+<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RX4Z9J');</script>
+<!-- End Google Tag Manager --><script type="rocketlazyloadscript" src="https://player.vimeo.com/api/player.js"></script><style id="thrive-template-css" type="text/css">@media (min-width:300px){.tve-theme-31771 #wrapper{--header-background-width:100%;--footer-background-width:100%;}.tve-theme-31771 .content-section [data-css="tve-u-1721a4cee87"]{width:436px;}.tve-theme-31771 .content-section [data-css="tve-u-1721a50acc6"]{max-width:927px;}.tve-theme-31771 .content-section .section-content{padding-left:20px !important;padding-right:20px !important;}}</style><style id="thrive-theme-layout-css" type="text/css">@media (max-width:1023px){.thrive-layout-31366 .main-container{flex-wrap:wrap}.thrive-layout-31366 .main-container div.main-columns-separator{width:100%}}</style><link type="text/css" rel="stylesheet" class="thrive-external-font" href="https://fonts.googleapis.com/css?family=Nunito:400,400i,800,800i,600,600i&amp;subset=latin&amp;display=swap"><link type="text/css" rel="stylesheet" class="thrive-external-font" href="https://fonts.googleapis.com/css?family=Crimson+Pro:300,700,800,600,400,900&amp;subset=latin&amp;display=swap"><style type="text/css" id="thrive-default-styles">@media (min-width: 300px) { .tcb-style-wrap h1{ color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);font-family:"Crimson Pro";--g-regular-weight:300;font-weight:var(--g-bold-weight, bold);font-size:40px;background-color:rgba(0, 0, 0, 0);font-style:normal;margin:0px;padding-top:0px;padding-bottom:24px;text-decoration:rgba(10, 10, 10, 0.85);text-transform:none;border-left:0px none rgba(10, 10, 10, 0.85);line-height:1.25em;--tcb-typography-font-family:"Crimson Pro";letter-spacing:0px;--tcb-typography-letter-spacing:0px;--tcb-typography-font-size:40px;--tcb-typography-font-weight:var(--g-bold-weight, bold);--g-bold-weight:700;--tcb-typography-line-height:1.25em; }.tcb-style-wrap h2{ font-family:"Crimson Pro";--g-regular-weight:300;font-weight:var(--g-bold-weight, bold);color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);padding-top:0px;margin-top:0px;padding-bottom:24px;margin-bottom:0px;font-size:34px;line-height:1.25em;--tcb-typography-font-family:"Crimson Pro";--g-bold-weight:700;--tcb-typography-font-size:34px;--tcb-typography-line-height:1.25em; }.tcb-style-wrap h3{ font-family:"Crimson Pro";--g-regular-weight:300;font-weight:var(--g-bold-weight, bold);color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);padding-top:0px;margin-top:0px;padding-bottom:24px;margin-bottom:0px;font-size:25px;line-height:1.25em;--tcb-typography-font-family:"Crimson Pro";--g-bold-weight:700;--tcb-typography-font-size:25px;--tcb-typography-line-height:1.25em; }.tcb-style-wrap h4{ font-family:"Crimson Pro";--g-regular-weight:300;font-weight:var(--g-bold-weight, bold);color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);padding-top:0px;margin-top:0px;padding-bottom:24px;margin-bottom:0px;font-size:22px;line-height:1.4em;--tcb-typography-font-family:"Crimson Pro";--g-bold-weight:700;--tcb-typography-font-size:22px; }.tcb-style-wrap h5{ font-family:"Crimson Pro";--g-regular-weight:300;font-weight:var(--g-bold-weight, bold);color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);padding-top:0px;margin-top:0px;padding-bottom:24px;margin-bottom:0px;line-height:1.4em;--tcb-typography-font-family:"Crimson Pro";--g-bold-weight:700;font-size:21px;--tcb-typography-font-size:21px; }.tcb-style-wrap h6{ font-family:"Crimson Pro";--g-regular-weight:300;font-weight:var(--g-bold-weight, bold);color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);padding-top:0px;margin-top:0px;padding-bottom:24px;margin-bottom:0px;line-height:1.6em;--tcb-typography-font-family:"Crimson Pro";--g-bold-weight:700;font-size:20px;--tcb-typography-font-size:20px; }.tcb-style-wrap p{ color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);font-family:Nunito;--g-regular-weight:400;font-weight:var(--g-regular-weight, normal);font-size:18px;padding-top:0px;margin-top:0px;padding-bottom:24px;margin-bottom:0px;--tcb-typography-font-family:Nunito;--tcb-typography-color:var(--tcb-skin-color-4);--g-bold-weight:800; }:not(.inc) .thrv_text_element a:not(.tcb-button-link), :not(.inc) .tcb-styled-list a, :not(.inc) .tcb-numbered-list a, .tve-input-option-text a, .tcb-post-content p a, .tcb-post-content li a, .tcb-post-content blockquote a, .tcb-post-content pre a{ --tcb-applied-color:var$(--tcb-skin-color-4);font-family:Nunito;--g-regular-weight:400;font-weight:var(--g-bold-weight, bold) ;font-size:inherit;text-decoration:none;--eff:expand;--tcb-typography-font-family:Nunito;--tcb-typography-color:var(--tcb-skin-color-4);--g-bold-weight:600;--eff-color:rgb(18, 110, 252);--eff-faded:rgba(18, 110, 252, 0.6);--eff-ensure-contrast:rgba(18, 110, 252, 0.6);--eff-ensure-contrast-complement:rgba(160, 18, 252, 0.6);box-shadow:none;border-bottom:medium none;background-color:rgba(0, 0, 0, 0);background-position:center bottom;background-repeat:no-repeat;background-attachment:scroll;background-image:linear-gradient(var(--eff-color), var(--eff-color));background-size:0px 0.1em;background-origin:padding-box;background-clip:border-box;animation:0s ease 0s 1 normal none running none;transition:background 0.15s ease-out 0.05s;padding-left:0px;color:var(--tcb-skin-color-0); }:not(.inc) .thrv_text_element a:not(.tcb-button-link):hover, :not(.inc) .tcb-styled-list a:hover, :not(.inc) .tcb-numbered-list a:hover, .tve-input-option-text a:hover, .tcb-post-content p a:hover, .tcb-post-content li a:hover, .tcb-post-content blockquote a:hover, .tcb-post-content pre a:hover { text-decoration:none;--eff:none;color:var(--tcb-skin-color-3);background-color:rgba(0, 0, 0, 0);background-position:center bottom;background-repeat:no-repeat;background-attachment:scroll;background-image:linear-gradient(var(--eff-color), var(--eff-color));background-size:100% 0.1em;background-origin:padding-box;background-clip:border-box;box-shadow:none; }.tcb-style-wrap ul:not([class*="menu"]), .tcb-style-wrap ol{ color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);font-family:Nunito;--g-regular-weight:400;font-weight:var(--g-regular-weight, normal);font-size:18px;margin-top:0px;margin-bottom:0px;padding-top:0px;padding-bottom:12px;padding-left:0px;--tcb-typography-font-family:Nunito;--tcb-typography-color:var(--tcb-skin-color-4);--g-bold-weight:600; }.tcb-style-wrap li:not([class*="menu"]){ color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);font-family:Nunito;--g-regular-weight:400;font-weight:var(--g-regular-weight, normal);font-size:18px;line-height:1.4em;padding-bottom:16px;margin-bottom:0px;--tcb-typography-font-family:Nunito;--tcb-typography-color:var(--tcb-skin-color-4);--g-bold-weight:600; }.tcb-style-wrap blockquote{ color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);font-family:Nunito;--g-regular-weight:400;font-weight:var(--g-regular-weight, normal);font-size:18px;padding-top:0px;padding-bottom:0px;border-left:2px solid var(--tcb-skin-color-1);margin-top:0px;margin-bottom:24px;--tcb-typography-font-family:Nunito;--tcb-typography-color:var(--tcb-skin-color-4);--g-bold-weight:600; }body, .tcb-plain-text{ color:var(--tcb-skin-color-4);--tcb-applied-color:var$(--tcb-skin-color-4);font-family:Nunito;--g-regular-weight:400;font-weight:var(--g-regular-weight, normal);font-size:18px;--tcb-typography-font-family:Nunito;--tcb-typography-color:var(--tcb-skin-color-4);--g-bold-weight:600; } }@media (max-width: 1023px) { .tcb-style-wrap h1{ font-size:36px;padding-bottom:22px;margin-bottom:0px; }.tcb-style-wrap h2{ padding-bottom:22px;margin-bottom:0px;font-size:28px; }.tcb-style-wrap h3{ padding-bottom:22px;margin-bottom:0px;font-size:22px; }.tcb-style-wrap h4{ padding-bottom:22px;margin-bottom:0px; }.tcb-style-wrap h5{ padding-bottom:22px;margin-bottom:0px; }.tcb-style-wrap h6{ padding-bottom:22px;margin-bottom:0px; }.tcb-style-wrap p{ padding-bottom:22px;margin-bottom:0px;padding-top:0px;margin-top:0px; }.tcb-style-wrap ul:not([class*="menu"]), .tcb-style-wrap ol{ padding-top:0px;padding-bottom:4px; }.tcb-style-wrap li:not([class*="menu"]){ line-height:1.75em;--tcb-typography-line-height:1.75em;padding-bottom:14px;margin-bottom:0px; }.tcb-style-wrap blockquote{ margin-bottom:22px; } }@media (max-width: 767px) { .tcb-style-wrap h1{ font-size:32px;padding-bottom:20px;margin-bottom:0px;line-height:1.2em;--tcb-typography-line-height:1.20em;--tcb-typography-font-size:32px; }.tcb-style-wrap h2{ font-size:26px;padding-bottom:20px;margin-bottom:0px;line-height:1.2em;--tcb-typography-line-height:1.20em;--tcb-typography-font-size:26px; }.tcb-style-wrap h3{ font-size:22px;padding-bottom:20px;margin-bottom:0px;line-height:1.2em;--tcb-typography-line-height:1.20em; }.tcb-style-wrap h4{ font-size:20px;padding-bottom:20px;margin-bottom:0px;line-height:1.2em;--tcb-typography-line-height:1.20em; }.tcb-style-wrap h5{ padding-bottom:20px;margin-bottom:0px;line-height:1.2em;--tcb-typography-line-height:1.20em; }.tcb-style-wrap h6{ padding-bottom:20px;margin-bottom:0px;line-height:1.2em;--tcb-typography-line-height:1.20em; }.tcb-style-wrap p{ padding-bottom:20px;margin-bottom:0px;padding-top:0px;margin-top:0px; }.tcb-style-wrap ul:not([class*="menu"]), .tcb-style-wrap ol{ padding-left:0px;padding-bottom:4px;padding-top:0px; }.tcb-style-wrap li:not([class*="menu"]){ padding-bottom:10px;margin-bottom:0px; }.tcb-style-wrap blockquote{ margin-bottom:20px; } }</style><link rel="icon" href="https://www.ETHMAN.com/wp-content/uploads/2021/07/cropped-Logo-512-by-512.png" sizes="32x32" />
+<link rel="icon" href="https://www.ETHMAN.com/wp-content/uploads/2021/07/cropped-Logo-512-by-512.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.ETHMAN.com/wp-content/uploads/2021/07/cropped-Logo-512-by-512.png" />
+<meta name="msapplication-TileImage" content="https://www.ETHMAN.com/wp-content/uploads/2021/07/cropped-Logo-512-by-512.png" />
+			<style type="text/css" class="tve_custom_style">@media (min-width:300px){[data-css="tve-u-tve-u-5ee2c907d060"]{padding-top:20px !important;padding-bottom:20px !important;}}</style>
+					<style type="text/css" id="wp-custom-css">
+			.hidetempdropdown {display:none;}
+
+/* GENERAL */
+
+body{
+font-variant-ligatures: none;
+}
+
+li,button {
+font-family: Nunito Sans;	
+}
+
+
+@media (min-width: 300px){
+:not(.inc) .thrv_text_element a
+
+{
+    text-decoration: underline;
+    font-weight:bold;
+}
+}
+
+/* Mouseover icon in the drop down what do you want to learn about on /category/blog/ */
+
+.mouseoverWhatDoYouWantToLearn .tcb-plain-text {
+    cursor: pointer;
+}
+
+.clickableCU, .clickableCU .tcb-plain-text {
+    cursor: pointer;
+}
+
+
+.CustomUpgradeLinks .tcb-plain-text 
+{
+    cursor: pointer;
+}
+
+
+/* THRIVE APPRENTICE */
+
+
+.tva-courses-container .tva-course-card .tva-course-card-content .tva-course-description h1 a {
+
+    font-size: 21px !important;
+    line-height: 1em;
+}
+
+.tva-courses-container .tva-course-card .tva-course-card-content .tva-course-description h1 {
+    margin: 0 0 0px !important;
+}
+
+.tva-courses-container .tva-course-card .tva-course-card-content {
+    padding: 16px 0 0px 0;
+}
+
+.tva-course-card-count {
+	font-size:1em !important;
+}
+
+
+
+body .tva-frontend-template .tva-course-lesson .tva-lesson-title {
+    font-size: 43px;
+    color: #232323;
+}
+
+
+.tva-cm-container .tva-cm-lesson>h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #5bc0eb;
+}
+
+
+body .tva-frontend-template#tva-courses-overview .tva-filters-wrapper .tva-filters-container .tva-filter-checkbox-container .tva-checkbox-holder label{
+	
+	//max-width: 100%;
+	
+}
+
+
+.tva-list-of-courses .tva-filters-container .tva-filter-checkbox-container {
+//width:100%;
+
+}
+.tva-filters-wrapper {
+ //   border: 1px solid #dfdfdf;
+ //   padding: 22px;
+//	box-shadow: 1px -1px 8px 3px #d1d1d1;
+}
+.tva-filters-wrapper::Before {
+ //   content:"Categories";
+font-size:22px:
+padding-top:11px;
+}
+
+.tva-list-of-courses .tva-filters-container {
+
+   // padding-top: 22px;
+}
+
+
+.tva-list-of-courses .tva-search-wrapper {
+
+   // margin: 22px;
+}
+
+
+body .tva-frontend-template#tva-courses-overview .tva-filters-wrapper .tva-filters-container .tva-filter-checkbox-container .tva-checkbox-holder label{
+	margin: 0 0 0 0px;
+	
+	
+}
+body .tva-frontend-template#tva-courses-overview .tva-filters-wrapper .tva-filters-container .tva-filter-checkbox-container .tva-checkbox-holder .tva-filter-icon{
+	
+	display:none;
+	
+}
+
+
+
+.tva-course-section:not(.tva-module-single-page) {
+    margin-top: -34px;
+
+}
+
+
+.tva-cm-redesigned-breadcrumbs {
+    margin: 24px auto 9px auto;
+   
+}
+
+
+/* apprentice */
+
+aside.tva-sidebar-container {
+    background: #f8f8f8;
+    border:1px solid lightgrey;
+    border-top:10px solid darkgrey;
+}
+
+
+
+/* Bullet Point Icons */
+
+@media only screen and (max-width: 1000px){
+.greencheck ul li{
+    list-style:none;	
+  	padding-left: 0em;
+    text-indent: -56px;
+padding-bottom: 1em;
+	
+}
+.greencheck ul li:before {
+    color:#58851f;
+  	content: '\2714';
+    margin-left:18px;    
+    font-size:22px;
+	  padding-right: 20px;
+}
+}
+
+@media only screen and (min-width: 1001px){
+.greencheck ul li{
+    list-style:none;	
+  	padding-left: 2em;
+    text-indent: -3.5em;
+	padding-bottom: 1em;
+	
+}
+.greencheck ul li:before {
+    color:#58851f;
+  	content: '\2714';
+    margin-left:18px;    
+    font-size:32px;
+	  padding-right: 20px;
+}
+}
+
+
+
+/* Bullet Point Icons */
+
+@media only screen and (max-width: 1000px){
+.redcross ul li{
+    list-style:none;	
+  	padding-left: 0em;
+    text-indent: -56px;
+padding-bottom: 1em;
+	
+}
+.redcross ul li:before {
+    color:#c60000;
+  	content: '\2716';
+    margin-left:18px;    
+    font-size:22px;
+	  padding-right: 20px;
+}
+}
+
+@media only screen and (min-width: 1001px){
+.redcross ul li{
+    list-style:none;	
+  	padding-left: 2em;
+    text-indent: -3.5em;
+	padding-bottom: 1em;
+	
+}
+.redcross ul li:before {
+    color:#c60000;
+  	content: '\2716';
+    margin-left:18px;    
+    font-size:32px;
+	  padding-right: 20px;
+}
+}
+
+.tve_image_caption .tve_image {
+    image-rendering: -webkit-optimize-contrast;
+}
+
+
+.hideboxcounter{
+	display:none;
+}
+
+#tve_editor ol, #tve_editor ul {
+    list-style-position: outside;
+}
+
+
+.tve-editable-field p {
+    color: grey !important;
+}		</style>
+					</head>
+
+	<body data-rsssl=1 class="page-template-default page page-id-32874 tve-theme-31771 thrive-layout-31366">
+<!-- Facebook Pixel Code -->
+<script type="rocketlazyloadscript">
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '847695361994669');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=847695361994669&amp;ev=PageView&amp;noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code --><!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RX4Z9J"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --><div id="wrapper" class="tcb-style-wrap"><header id="thrive-header" class="thrv_wrapper thrv_symbol thrv_header thrv_symbol_31781 tve-default-state" role="banner"><div class="thrive-shortcode-html thrive-symbol-shortcode tve-default-state" data-symbol-id="31781"><style type="text/css" id="tcb-style-base-tcb_symbol-31781"  onLoad="typeof window.lightspeedOptimizeStylesheet === 'function' && window.lightspeedOptimizeStylesheet()" class="tcb-lightspeed-style">.tve_image_caption{position:relative;}.tve_image_caption:not(.tcb-mm-image.tve-tab-image){height:auto !important;}.tve_image_caption .tve_image{max-width:100%;width:100%;}.thrive-symbol-shortcode{position:relative;}html{text-rendering:auto !important;}html body{text-rendering:auto !important;}body.tcb_symbol-template-default::before{content:none;}.thrv_wrapper{margin-top:20px;margin-bottom:20px;padding:1px;}.thrv_symbol .thrv_wrapper:not(.thrv_icon){box-sizing:border-box !important;}.tve_image{border-radius:0px;box-shadow:none;}div .tve_image_caption{padding:0px;max-width:100% !important;box-sizing:border-box !important;}.tve_image_caption .tve_image_frame{display:block;max-width:100%;position:relative;overflow:hidden;}.tve_image_caption .tve_image{display:block;padding:0px;height:auto;}.thrv_symbol.thrv_header{width:100%;position:relative;box-sizing:border-box;}.thrv_symbol.thrv_header .thrive-symbol-shortcode{margin:0px auto;position:relative;}.symbol-section-in{margin:0px auto;position:relative;z-index:1;box-sizing:border-box;}.symbol-section-in:empty::before{font-family:sans-serif;line-height:40px;}.symbol-section-in::after,.symbol-section-in::before{content:"";display:block;overflow:auto;}.symbol-section-out{position:absolute;width:100%;height:100%;left:0px;top:0px;box-sizing:border-box !important;overflow:hidden;}@media (max-width:767px){html,body{overflow-x:hidden !important;max-width:100vw !important;}}@media screen and (max-device-width:480px){body{-moz-text-size-adjust:none;}}</style><style class='tve-symbol-custom-style'>@media (min-width:300px){.thrv_symbol_31781 [data-css="tve-u-16ea7c2a5fc"]{background-color:rgb(45,45,45) !important;}.thrv_symbol_31781 .thrive-symbol-shortcode{padding:20px !important;}.thrv_symbol_31781 [data-css="tve-u-16ea7c47af0"]{--g-regular-weight:400;--g-bold-weight:700;display:block;min-height:1px !important;}.thrv_symbol_31781 [data-css="tve-u-1721a71f159"]{width:44px;margin:0px auto !important;float:none;}}</style> <div class="symbol-section-out" style="" data-css="tve-u-16ea7c2a5fc"></div> <div class="symbol-section-in" style="" data-css="tve-u-16ea7c47af0"><div class="thrv_wrapper tve_image_caption" data-css="tve-u-1721a71f159" style=""><span class="tve_image_frame"></span></div></div> </div></header><div id="content">
+
+	
+
+	<div class="main-container thrv_wrapper">
+		
+		<div id="theme-content-section" class="theme-section content-section"><div class="section-background"></div><div class="section-content">
+
+
+
+
+
+<div class="thrv_wrapper tve_image_caption" data-css="tve-u-1721a4cee87" style=""><span class="tve_image_frame"></span></div><section class="tcb-post-content tcb-shortcode thrv_wrapper" data-css="tve-u-1721a50acc6"><div id="tve_flt" class="tve_flt tcb-style-wrap"><div id="tve_editor" class="tve_shortcode_editor tar-main-content" data-post-id="32874"><div class="thrv_wrapper thrv_text_element" data-css="tve-u-tve-u-5ee2c907d060" style=""><p>​Thanks for contacting us! <br><br>We will get in touch with you shortly.</p></div></div></div><div class="tcb_flag" style="display: none"></div>
+<span class="tve-leads-two-step-trigger tl-2step-trigger-0"></span><span class="tve-leads-two-step-trigger tl-2step-trigger-0"></span></section>
+
+
+
+
+
+</div></div>
+	</div>
+
+	
+
+<div class="main-content-background"></div></div><footer id="thrive-footer" class="thrv_wrapper thrv_symbol thrv_footer thrv_symbol_31775" role="contentinfo"><div class="thrive-shortcode-html thrive-symbol-shortcode " data-symbol-id="31775"><style type="text/css" id="tcb-style-base-tcb_symbol-31775"  onLoad="typeof window.lightspeedOptimizeStylesheet === 'function' && window.lightspeedOptimizeStylesheet()" class="tcb-lightspeed-style">.thrv_text_element a:not(.tcb-button-link){font-size:inherit;}.thrv_text_element{overflow-wrap:break-word;}.thrive-symbol-shortcode{position:relative;}.thrv_footer .thrive-symbol-shortcode{box-sizing:border-box;margin-right:auto;margin-left:auto;min-height:40px;}html{text-rendering:auto !important;}html body{text-rendering:auto !important;}body.tcb_symbol-template-default::before{content:none;}.thrv_wrapper{margin-top:20px;margin-bottom:20px;padding:1px;}.thrv_symbol .thrv_wrapper:not(.thrv_icon){box-sizing:border-box !important;}.thrv_wrapper.thrv_text_element{margin:0px;}p{font-size:1em;}.thrv_symbol.thrv_footer{width:100%;position:relative;box-sizing:border-box;}.thrv_symbol.thrv_footer .thrive-symbol-shortcode{margin:0px auto;position:relative;}.symbol-section-in{margin:0px auto;position:relative;z-index:1;box-sizing:border-box;}.symbol-section-in:empty::before{font-family:sans-serif;line-height:40px;}.symbol-section-in::after,.symbol-section-in::before{content:"";display:block;overflow:auto;}.symbol-section-out{position:absolute;width:100%;height:100%;left:0px;top:0px;box-sizing:border-box !important;overflow:hidden;}.thrv_wrapper.thrv_text_element{padding:1px;}@media (max-width:767px){html,body{overflow-x:hidden !important;max-width:100vw !important;}}@media screen and (max-device-width:480px){body{-moz-text-size-adjust:none;}}</style><style class='tve-symbol-custom-style'>@media (min-width:300px){.thrv_symbol_31775 .symbol-section-out{background-color:rgb(44,44,44) !important;}.thrv_symbol_31775 .symbol-section-in{--tve-font-size:15px;padding:40px 20px !important;min-height:1px !important;--tve-color:rgb(255,255,255);}:not(#tve) .thrv_symbol_31775 .symbol-section-in p,:not(#tve) .thrv_symbol_31775 .symbol-section-in li,:not(#tve) .thrv_symbol_31775 .symbol-section-in blockquote,:not(#tve) .thrv_symbol_31775 .symbol-section-in address,:not(#tve) .thrv_symbol_31775 .symbol-section-in .tcb-plain-text,:not(#tve) .thrv_symbol_31775 .symbol-section-in label{font-size:var(--tve-font-size,15px);}:not(#tve) .thrv_symbol_31775 [data-css="tve-u-170616274a3"]{padding-top:0px !important;margin-top:0px !important;padding-bottom:0px !important;margin-bottom:0px !important;font-size:13px !important;}:not(#tve) .thrv_symbol_31775 .symbol-section-in p,:not(#tve) .thrv_symbol_31775 .symbol-section-in li,:not(#tve) .thrv_symbol_31775 .symbol-section-in blockquote,:not(#tve) .thrv_symbol_31775 .symbol-section-in address,:not(#tve) .thrv_symbol_31775 .symbol-section-in .tcb-plain-text,:not(#tve) .thrv_symbol_31775 .symbol-section-in label,:not(#tve) .thrv_symbol_31775 .symbol-section-in h1,:not(#tve) .thrv_symbol_31775 .symbol-section-in h2,:not(#tve) .thrv_symbol_31775 .symbol-section-in h3,:not(#tve) .thrv_symbol_31775 .symbol-section-in h4,:not(#tve) .thrv_symbol_31775 .symbol-section-in h5,:not(#tve) .thrv_symbol_31775 .symbol-section-in h6{color:var(--tve-color,rgb(255,255,255));--tcb-applied-color:rgb(255,255,255);}:not(#tve) .thrv_symbol_31775 [data-css="tve-u-1720a8d01d2"]{color:rgb(248,248,248) !important;--tcb-applied-color:var$(--tcb-skin-color-2)!important;font-size:13px !important;}:not(#tve) .thrv_symbol_31775 [data-css="tve-u-1720a8d1f46"]{color:rgb(230,230,230) !important;text-decoration-line:none !important;--eff:none!important;text-decoration-color:var(--eff-color,currentColor)!important;}}@media (max-width:1023px){.thrv_symbol_31775 .symbol-section-in{padding:40px !important;}}@media (max-width:767px){.thrv_symbol_31775 .symbol-section-in{text-align:center;padding:30px 20px !important;}}</style> <div class="symbol-section-out" style=""></div> <div class="symbol-section-in" style=""> <div class="thrv_wrapper thrv_text_element" style=""><p data-css="tve-u-170616274a3" style="text-align: center;">© Copyright <span class="thrive-shortcode-content" data-attr-id="Y" data-extra_key="Y" data-option-inline="1" data-shortcode="thrv_dynamic_data_date" data-shortcode-name="Year (2029)">2021</span>. ETHMAN. All rights reserved.</p></div><div class="thrv_wrapper thrv_text_element tve-froala fr-box fr-basic"><p data-css="tve-u-1720a8d01d2" style="text-align: center;"><a class="tve-froala fr-basic" data-css="tve-u-1720a8d1f46" href="https://www.ETHMAN.com/privacy-policy/" style="outline: currentcolor none medium;">​Privacy</a></p></div> </div> </div></footer></div>
+<div style="display: none;">
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"xml:space="preserve">
+	<defs>
+
+	<symbol id="tcm-reply" viewBox="0 0 100 100">
+			<g>
+				<path d="M69.9,38.1L69.9,38.1c-1.5-3.7-4.7-6.4-7.4-9.2c-2.8-2.8-6.3-4.7-9.9-6.3c-3.7-1.6-7.7-2.4-11.7-2.4h-11
+					l4.7-4.8c3.4-3.4,3.4-9,0-12.4c-3.4-3.4-8.9-3.4-12.2,0L2.8,22.7c-3.4,3.4-3.4,9,0,12.4l19.4,19.7c1.7,1.7,3.9,2.6,6.1,2.6
+					c2.2,0,4.4-0.9,6.1-2.6c3.4-3.4,3.4-9,0-12.4l-4.6-4.6h10.9c3.4,0,6.6,1.4,9.1,3.8l4.8,4.8c1.2,2,3,3.4,5.1,4.1
+					c2.1,0.6,4.5,0.4,6.6-0.7C70.5,47.5,72,42.3,69.9,38.1z"/>
+				<ellipse cx="81.1" cy="60.8" rx="8.5" ry="8.6"/>
+			</g>
+	</symbol>
+
+	<symbol id="tcm-icon-thumb_down" viewBox="0 0 24 24">
+		<g>
+			<path d="M18.984 3h4.031v12h-4.031v-12zM15 3c1.078 0 2.016 0.938 2.016 2.016v9.984c0 0.563-0.234 1.031-0.609
+			1.406l-6.563 6.609-1.078-1.078c-0.281-0.281-0.422-0.609-0.422-1.031v-0.328l0.984-4.594h-6.328c-1.078 0-2.016-0.891-2.016-1.969l0.047-0.094h-0.047v-1.922c0-0.281
+			0.047-0.516 0.141-0.75l3.047-7.031c0.281-0.703 0.984-1.219 1.828-1.219h9z" />
+		</g>
+	</symbol>
+
+	<symbol id="tcm-icon-thumb_up" viewBox="0 0 24 24">
+		<g>
+			<path d="M23.016 9.984l-0.047 0.094h0.047v1.922c0 0.281-0.047 0.516-0.141 0.75l-3.047 7.031c-0.281 0.703-0.984
+			1.219-1.828 1.219h-9c-1.078 0-2.016-0.938-2.016-2.016v-9.984c0-0.563 0.234-1.031 0.609-1.406l6.563-6.609 1.078
+			1.078c0.281 0.281 0.422 0.609 0.422 1.031v0.328l-0.984 4.594h6.328c1.078 0 2.016 0.891 2.016 1.969zM0.984 21v-12h4.031v12h-4.031z" />
+		</g>>
+
+	</symbol>
+
+	<symbol id="tcm-add-comment" viewBox="0 0 267.3 245">
+		<path style="fill:#FFFFFF;" class="st0" d="M265.7,61C259.6,27.5,230.3,2,195.1,2H72.5C33,2,0.8,34.2,0.8,73.8v77c0,0.1,0,0.1,0,0.2v81.6
+			c0,0-1.8,11.1,9.7,11.1c0,0,4.2,1,13.1-4.6l46.8-43.2h124.6c39.5,0,71.7-32.2,71.7-71.7V83.8L265.7,61z M78.4,114
+			c-8.1,0-14.6-6.5-14.6-14.6c0-8.1,6.5-14.6,14.6-14.6S93,91.4,93,99.5C93,107.5,86.5,114,78.4,114z M137.5,114
+			c-8.1,0-14.6-6.5-14.6-14.6c0-8.1,6.5-14.6,14.6-14.6c8.1,0,14.6,6.5,14.6,14.6C152.1,107.5,145.5,114,137.5,114z M196.5,114
+			c-8.1,0-14.6-6.5-14.6-14.6c0-8.1,6.5-14.6,14.6-14.6c8.1,0,14.6,6.5,14.6,14.6C211.1,107.5,204.6,114,196.5,114z"/>
+	</symbol>
+
+	<symbol id="tcm-logo-footer" viewBox="0 0 130 100">
+		<path style="fill:#434343;" class="st0" d="M108.8,26.5C106.7,14.9,96.5,6.1,84.4,6.1H41.9C28.2,6.1,17,17.2,17,30.9v26.7c0,0,0,0,0,0.1v28.2
+			c0,0-0.6,3.8,3.4,3.8c0,0,1.5,0.4,4.6-1.6l16.2-14.9h12.1c0.1-0.2,0.3-0.4,0.4-0.6l2.2-3.1c0.4-0.6,1.9-2.3,3.1-3.6H37.6
+			c-1.1,0-2.1,0.6-2.8,1.4l0,0L24.1,78.6V58.2c0-0.2,0.1-0.4,0.1-0.6V30.9c0-9.7,7.9-17.6,17.6-17.6h42.5c9.7,0,17.6,7.9,17.6,17.6
+			v16.9c2.6-0.4,5.3-0.6,7.2-0.7V34.4L108.8,26.5z"/>
+		<path style="fill:#57A245;" class="st1" d="M43.7,39.9c-3.3,0-6-2.7-6-6c0-3.3,2.7-6,6-6h38.9c3.3,0,6,2.7,6,6c0,3.3-2.7,6-6,6H43.7z"/>
+		<path style="fill:#434343;" class="st0" d="M43.7,52.2h38.9c2.4,0,4.3-1.9,4.3-4.3s-1.9-4.3-4.3-4.3H43.7c-2.4,0-4.3,1.9-4.3,4.3S41.3,52.2,43.7,52.2"/>
+		<path style="fill-rule:evenodd;clip-rule:evenodd;fill:#57A245;" class="st2" d="M118.2,52.4c-1.2,0-1.6,0.2-2.4,0.5c-0.9,0.3-1.9,1-2.6,1.7l-1.8,1.7c-0.2,0.2-0.2,0.2-0.3,0.4
+			c-3.4,4.2-4.1,4.9-6.8,10.2c-1.2,2.5-2.7,4.8-4.2,7.1c-1,1.6-2,3.2-3.2,4.6c-0.1,0.2-0.2,0.2-0.3,0.4c-0.7,0.9-1.7,1.7-2.5,2.5
+			c-0.6,0.5-1.3,1-1.9,1.5c-0.6,0.4-1.1,0.8-1.7,1.1l-0.9,0.5c-0.2,0.1-0.3,0.2-0.5,0.3c-0.1,0-0.3,0.2-0.4,0.2
+			c-0.2,0.1-0.4,0.2-0.5,0.2c-3.7,1.8-8.5,3-12.7,3.4L72.7,89c-0.8,0.1-2.8,0.2-4.7,0.2c-1.6,0-3,0-3.5-0.2l0.3-0.7
+			c0.6-1.4,1.3-2.8,2.1-4.1c0.1-0.2,0.2-0.4,0.4-0.6l1.5-2.6l3.9-5.3l3.5-3.6l0.2-0.2c0.2-0.1,0.2-0.1,0.3-0.2l0.8-0.7
+			c0.1-0.1,0.2-0.1,0.3-0.2c0.2-0.2,0.3-0.3,0.5-0.4l3.7-2.5c1.3-0.8,2.6-1.6,3.8-2.3l4-2.1c1.5-0.8,4-2.1,5.5-2.7l4.1-1.9
+			c-0.6,0.1-1.4,0.4-1.9,0.6c-0.6,0.2-1.3,0.4-1.9,0.6l-3.8,1.3c-1.8,0.6-3.6,1.4-5.5,2.1l-3.5,1.5c-1.3,0.5-3.3,1.6-4.7,2.3
+			c-1.5,0.8-2.9,1.8-4.3,2.6l-4.8,3.4c-0.1,0.1-0.2,0.2-0.4,0.3l-2.7,2.3c-0.8,0.8-1.8,1.7-2.5,2.5c-0.2,0.2-0.2,0.2-0.3,0.4
+			c-0.7,0.7-1.3,1.6-1.9,2.4c-0.9,1.2-1.8,2.5-2.5,3.8l-1.3,2.5c-0.5,1-2.7,6-2.8,7.4h-0.2c0-0.2-0.5-2.5-0.7-4.4v-1.6
+			c0-0.1,0-0.1,0-0.2c0.2-1.1,0.1-1.8,0.3-3.1c0.6-3.6,2.2-7.4,4.2-10.4l2.1-3c0.6-0.8,2.8-3.4,3.5-3.8c0.6-0.5,1.2-1.3,1.9-1.8
+			c0.3-0.2,0.6-0.5,0.9-0.8c0.4-0.2,0.6-0.5,1-0.8l2-1.5c2-1.5,4.2-2.8,6.4-3.8c2.4-1.2,4.7-2.1,7.2-3.1c3.2-1.3,7.6-2.2,10.9-2.9
+			c3.5-0.7,12.3-2.3,16.6-2.3h0.9C114,51.2,117.4,51.2,118.2,52.4z"/>
+		<path style="fill:none;" class="st3" d="M99.5,58.5c0.4,0,0.2,0,0.2-0.1C99.4,58.4,99.6,58.4,99.5,58.5z M99.5,58.5c0.1-0.1-0.1-0.1,0.2-0.1
+			C99.7,58.5,99.9,58.5,99.5,58.5 M99.9,58.3l-0.1,0.1 M99.5,58.5c-0.6,0.1-1.4,0.4-1.9,0.6c-0.6,0.2-1.3,0.4-1.9,0.6l-3.8,1.3
+			c-1.8,0.6-3.6,1.4-5.5,2.1l-3.5,1.5c-1.3,0.5-3.3,1.6-4.7,2.3c-1.5,0.8-2.9,1.8-4.3,2.6l-4.8,3.4c-0.1,0.1-0.2,0.2-0.4,0.3l-2.7,2.3
+			c-0.8,0.8-1.8,1.7-2.5,2.5c-0.2,0.2-0.2,0.2-0.3,0.4c-0.7,0.7-1.3,1.6-1.9,2.4c-0.9,1.2-1.8,2.5-2.5,3.8l-1.3,2.5
+			c-0.5,1-2.7,6-2.8,7.4h-0.2c0-0.2-0.5-2.5-0.7-4.4v-1.6c0-0.1,0-0.1,0-0.2c0.2-1.1,0.1-1.8,0.3-3.1c0.6-3.6,2.2-7.4,4.2-10.4l2.1-3
+			c0.6-0.8,2.8-3.4,3.5-3.8c0.6-0.5,1.2-1.3,1.9-1.8c0.3-0.2,0.6-0.5,0.9-0.8c0.4-0.2,0.6-0.5,1-0.8l2-1.5c2-1.5,4.2-2.8,6.4-3.8
+			c2.4-1.2,4.7-2.1,7.2-3.1c3.2-1.3,7.6-2.2,10.9-2.9c3.5-0.7,12.3-2.3,16.6-2.3h0h0.2h0.6c2.2,0,5.6,0.1,6.4,1.3
+			c-1.2,0-1.6,0.2-2.4,0.5c-0.9,0.3-1.9,1-2.6,1.7l-1.8,1.7c-0.2,0.2-0.2,0.2-0.3,0.4c-3.4,4.2-4.1,4.9-6.8,10.2
+			c-1.2,2.5-2.7,4.8-4.2,7.1c-1,1.6-2,3.2-3.2,4.6c-0.1,0.2-0.2,0.2-0.3,0.4c-0.7,0.9-1.7,1.7-2.5,2.5c-0.6,0.5-1.3,1-1.9,1.5
+			c-0.6,0.4-1.1,0.8-1.7,1.1l-0.9,0.5c-0.2,0.1-0.3,0.2-0.5,0.3c-0.1,0-0.3,0.2-0.4,0.2c-0.2,0.1-0.4,0.2-0.5,0.2
+			c-3.7,1.8-8.5,3-12.7,3.4L72.7,89c-0.8,0.1-2.8,0.2-4.7,0.2c-1.6,0-3,0-3.5-0.2l0.3-0.7c0.6-1.4,1.3-2.8,2.1-4.1
+			c0.1-0.2,0.2-0.4,0.4-0.6l1.5-2.6l3.9-5.3l3.5-3.6c0.1-0.1,0.2-0.2,0.2-0.2c0.2-0.1,0.2-0.1,0.3-0.2l0.8-0.7
+			c0.1-0.1,0.2-0.1,0.3-0.2c0.2-0.2,0.3-0.3,0.5-0.4l3.7-2.5c1.3-0.8,2.6-1.6,3.8-2.3l4-2.1c1.5-0.8,4-2.1,5.5-2.7L99.5,58.5"/>
+	</symbol>
+
+	<symbol id="tcm-related-posts-arrow" viewBox="0 0 16 16">
+		<path class="st0" d="M8,15.9c-4.4,0-7.9-3.5-7.9-7.9S3.6,0.1,8,0.1s7.9,3.5,7.9,7.9S12.4,15.9,8,15.9z M8,2.4C4.9,2.4,2.4,4.9,2.4,8
+			s2.5,5.6,5.6,5.6s5.6-2.5,5.6-5.6S11.1,2.4,8,2.4z M11.9,8.3l-3.3,3.3c-0.1,0.1-0.2,0.1-0.2,0.1c-0.2,0-0.3-0.2-0.3-0.3v-2H4.4
+			C4.2,9.3,4.1,9.2,4.1,9V7c0-0.2,0.2-0.3,0.3-0.3H8v-2c0-0.2,0.1-0.3,0.3-0.3c0.1,0,0.2,0,0.2,0.1l3.3,3.3C11.9,7.9,12,7.9,12,8
+			S11.9,8.2,11.9,8.3z"/>
+	</symbol>
+
+	<symbol id="tcm-sort-by-dropdown" viewBox="0 0 12 7">
+		<path style="fill:#6E767D;" class="st0" d="M0.3,1.5l5.2,5.2c0,0,0.5,0.5,1.1,0l5.2-5.2c0,0,0.4-0.4,0.2-0.9c0,0-0.1-0.4-0.7-0.4H0.8c0,0-0.5,0-0.7,0.4
+			C0.1,0.5-0.2,1,0.3,1.5z"/>
+	</symbol>
+
+	<symbol id="tcm-author-icon" viewBox="0 0 1020 1080">
+		<polygon style="fill:#474F57" class="st0" points="44.5,882.9 251.4,1081 251.4,889.8 "/>
+		<path style="fill:#6E767D" class="st1" d="M937.8,891.8H81.2c-44.3,0-80.6-36.3-80.6-80.6V82.7c0-44.3,36.3-80.6,80.6-80.6h856.6
+			c44.3,0,80.6,36.3,80.6,80.6v728.5C1018.4,855.5,982.1,891.8,937.8,891.8z"/>
+		<g>
+			<path style="fill:#6E767D" class="st2" d="M732,688.3c-0.5,0.1-2.7,0.5-6.3,1.1c-142.4,25.4-168.6,29.8-171.6,30.1c-7,0.8-12.3,0.4-16-1.3
+				c-2.4-1-3.6-2.3-4-2.8c0.2-1,1.4-3.3,2.2-4.7c0.7-1.4,1.6-3,2.3-4.6c4.9-11.1,1.5-22.4-8.9-29.5c-7.8-5.3-18.1-7.4-30.6-6.3
+				c-7.5,0.6-138.9,22.6-211.1,34.7l-35.4,27.7c82.6-13.9,240.1-40.2,248.4-41c7.4-0.6,13.2,0.3,16.7,2.7c2,1.4,1.8,1.8,1.3,3.1
+				c-0.4,0.9-1,2-1.6,3.2c-2.4,4.4-5.6,10.5-4.5,18c1.2,8.2,7.3,15.3,16.7,19.4c5.3,2.3,11.4,3.5,18.4,3.5c2.8,0,5.7-0.2,8.8-0.5
+				c5.7-0.7,63.8-10.9,172.9-30.3c3.6-0.6,5.8-1,6.3-1.1c5.9-1,9.8-6.6,8.7-12.5C743.4,691.2,737.8,687.3,732,688.3L732,688.3z
+				 M732,688.3"/>
+			<path style="fill:#FFFFFF" class="st2" d="M349.8,583.9l-91.7,95.5c-10.1,10.5-17.2,23.5-20.6,37.7l130.2-102c40.8,18,73.3,23.7,98.3,23.7
+				c43.8,0,64.2-17.7,64.2-17.7c-40.8-21.2-46.6-60.6-46.6-60.6c31.3,13.2,96.4,28.7,96.4,28.7c86.5-57.5,131.7-181.9,131.7-181.9
+				c-9,2.5-17.5,3.5-25.6,3.5c-40.6,0-68.5-25.9-68.5-25.9l113-24.5c37.6-76.7,41.2-211.1,41.2-211.1L428.2,453.5
+				C389.2,487.9,361.9,533.4,349.8,583.9L349.8,583.9z M349.8,583.9"/>
+		</g>
+	</symbol>
+
+	<symbol id="tcm-bulk-action-arrow" viewBox="0 0 12 7">
+		<path style="fill:#6E767D" class="st0" d="M0.3,1.5l5.2,5.2c0,0,0.5,0.5,1.1,0l5.2-5.2c0,0,0.4-0.4,0.2-0.9c0,0-0.1-0.4-0.7-0.4H0.8c0,0-0.5,0-0.7,0.4
+			C0.1,0.5-0.2,1,0.3,1.5z"/>
+	</symbol>
+
+
+	</defs>
+	</svg>
+</div><script type="rocketlazyloadscript" data-rocket-type='text/javascript'>/**
+ * Displays toast message from storage, it is used when the user is redirected after login
+ */
+if ( window.sessionStorage ) {
+	window.addEventListener( 'load', function () {
+		var message = sessionStorage.getItem( 'tcb_toast_message' );
+
+		if ( message ) {
+			tcbToast( sessionStorage.getItem( 'tcb_toast_message' ), false );
+			sessionStorage.removeItem( 'tcb_toast_message' );
+		}
+	} );
+}
+
+/**
+ * Displays toast message
+ */
+function tcbToast( message, error, callback ) {
+	/* Also allow "message" objects */
+	if ( typeof message !== 'string' ) {
+		message = message.message || message.error || message.success;
+	}
+	if ( ! error ) {
+		error = false;
+	}
+
+	let _icon = 'checkmark',
+		_extra_class = '';
+	if ( error ) {
+		_icon = 'cross';
+		_extra_class = ' tve-toast-error';
+	}
+
+	jQuery( 'body' ).slideDown( 'fast', function () {
+		jQuery( 'body' ).prepend( '<div class="tvd-toast tve-fe-message"><div class="tve-toast-message"><div class="tve-toast-icon-container' + _extra_class + '"><span class="tve_tick thrv-svg-icon"><svg xmlns="http://www.w3.org/2000/svg" class="tcb-checkmark" style="width: 100%; height: 1em; stroke-width: 0; fill: #ffffff; stroke: #ffffff;" viewBox="0 0 32 32"><path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path></svg></span></div><div class="tve-toast-message-container">' + message + '</div></div></div>' );
+	} );
+
+	setTimeout( function () {
+		jQuery( '.tvd-toast' ).hide();
+
+		if ( typeof callback === 'function' ) {
+			callback();
+		}
+
+	}, 3000 );
+}
+</script><script type='text/javascript' id='tve-dash-frontend-js-extra'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"https:\/\/www.ETHMAN.com\/wp-admin\/admin-ajax.php","force_ajax_send":"1","is_crawler":"","recaptcha":{"api":"recaptcha","connection":{"version":"v3","browsing_history":"1","threshold":"0.5"},"site_key":"6LcrUNkZAAAAAOIrg0Zb2SoAzMPgmvbXtsyDsRib","action":"tve_dash_api_handle_save"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.ETHMAN.com/wp-content/themes/thrive-theme/thrive-dashboard/js/dist/frontend.min.js?ver=2.6.1' id='tve-dash-frontend-js'></script>
+<script type='text/javascript' src='https://www.ETHMAN.com/wp-includes/js/wp-embed.min.js?ver=5.7.2' id='wp-embed-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">var tcb_post_lists=JSON.parse('[]');</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">/*<![CDATA[*/if ( !window.TL_Const ) {var TL_Const={"security":"c65e60b5e4","ajax_url":"https:\/\/www.ETHMAN.com\/wp-admin\/admin-ajax.php","forms":[],"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":1,"custom_post_data":{"http_referrer":"https:\/\/www.ETHMAN.com\/contact-thank-you\/"},"current_screen":{"screen_type":3,"screen_id":32874},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin","tcb_token","tve_labels","tve_mapping","_api_custom_fields","_sendParams","_autofill"]};} else {ThriveGlobal.$j.extend(true, TL_Const, {"security":"c65e60b5e4","ajax_url":"https:\/\/www.ETHMAN.com\/wp-admin\/admin-ajax.php","forms":[],"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":1,"custom_post_data":{"http_referrer":"https:\/\/www.ETHMAN.com\/contact-thank-you\/"},"current_screen":{"screen_type":3,"screen_id":32874},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin","tcb_token","tve_labels","tve_mapping","_api_custom_fields","_sendParams","_autofill"]})} /*]]> */</script><div></div><script type="rocketlazyloadscript" data-rocket-type='text/javascript'>
+/* <![CDATA[ */
+var TVE_Ult_Data = {"ajaxurl":"https:\/\/www.ETHMAN.com\/wp-admin\/admin-ajax.php","ajax_load_action":"tve_ult_ajax_load","conversion_events_action":"tve_ult_conversion_event","shortcode_campaign_ids":[],"matched_display_settings":[37683],"campaign_ids":[37683],"post_id":32874,"is_singular":true,"tu_em":"","evergreen_redirects":[]};
+/* ]]> */
+</script>
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://www.ETHMAN.com/wp-content/plugins/thrive-ultimatum/js/dist/frontend.min.js?v=2.6.2"></script>
+</body>
+
+</html>
+
